@@ -10,7 +10,84 @@
 
 <body>
   <!--  Your HTML goes here-->
-  <h1>Welcome to WEB 1400!!!!!</h1>
 <script type="module" src="./javascripts/main.js"></script>
+<div class="site">
+  <header class="site-header">
+    <h1 class="site-title">Tide & Tile</h1>
+    <p class="tag">A small demo of CSS Grid (mobile-first)</p>
+  </header>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <ul class="nav-list">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main class="main" id="home">
+    <section class="hero">
+      <h2>Welcome</h2>
+      <p>This is a small responsive demo using CSS Grid. Start on mobile, then resize to see tablet and desktop layouts.</p>
+    </section>
+
+    <section class="content">
+      <article class="article">
+        <h3>Article Title</h3>
+        <p>Short paragraph demonstrating how content flows in the grid. Use relative units for spacing and font sizes.</p>
+      </article>
+
+      <article class="article">
+        <h3>Another Article</h3>
+        <p>Flexbox is used inside small components (like the nav and the card list) while Grid controls the overall page layout.</p>
+      </article>
+
+      <aside class="aside" id="about">
+        <h4>About</h4>
+        <p>Brief aside content. On mobile this stacks; on larger screens it becomes a side column.</p>
+      </aside>
+    </section>
+
+    <section class="gallery" id="gallery" aria-label="Gallery">
+      <h3>Gallery</h3>
+      <div class="cards">
+        <div class="card"><img src="images/beare.jpg" alt="Placeholder"><p>Card A</p></div>
+        <div class="card"><img src="images/emoji.jpg" alt="Placeholder"><p>Card B</p></div>
+        <div class="card"><img src="images/tyler.jpg" alt="Placeholder"><p>Card C</p></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <h3>Contact</h3>
+      <form class="simple-form" action="#" method="post">
+        <label>
+          Name<br>
+          <input type="text" name="name" placeholder="Your name">
+        </label>
+        <label>
+          Email<br>
+          <input type="email" name="email" placeholder="you@example.com">
+        </label>
+        <label>
+          Message<br>
+          <textarea name="message" rows="4" placeholder="A short message..."></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="submit">Send</button>
+          <button type="reset">Reset</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 Tide & Tile — simple responsive grid demo</p>
+  </footer>
+</div>
+
+
+
+
 </body>
 </html>

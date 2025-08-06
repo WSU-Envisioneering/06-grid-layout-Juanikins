@@ -1,1 +1,222 @@
 /* Your styles go here */
+/* Mobile-first responsive grid + light flex usage */
+
+/* ---------- Reset & base ---------- */
+* { box-sizing: border-box; }
+html,body { height: 100%; margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #102028; background: #f7fafb; }
+a { color: #0b6aa6; text-decoration: none; }
+
+/* Use rem for spacing; base font-size is browser default (16px) so 1rem ≈ 16px */
+:root {
+  --gap: 1rem;
+  --pad: 0.9rem;
+  --accent: #0b6aa6;
+  --muted: #6b7a7f;
+  --card-bg: #ffffff;
+}
+
+
+
+.site {
+  display: grid;
+  grid-template-columns: 1fr; /* single column on mobile */
+  grid-template-rows: auto auto 1fr auto; /* header, nav, main, footer */
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+  gap: var(--gap);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: calc(var(--gap) * 0.75);
+}
+
+/* ---------- Regions ---------- */
+.site-header {
+  grid-area: header;
+  background: linear-gradient(180deg, #eef8fb, #ffffff);
+  padding: calc(var(--pad));
+  text-align: center;
+  border-radius: 8px;
+}
+.site-title { margin: 0; font-size: 1.25rem; }
+.tag { margin: .25rem 0 0; color: var(--muted); font-size: .95rem; }
+
+.site-nav {
+  grid-area: nav;
+  background: transparent;
+  padding: 0;
+}
+
+/* nav uses flexbox to layout items in a row or column */
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row; /* on mobile we keep it horizontal but wrap */
+  gap: .5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: .25rem 0;
+}
+.nav-list a {
+  display: inline-block;
+  padding: .45rem .7rem;
+  border-radius: 6px;
+  background: rgba(11,106,166,0.08);
+  color: #0b6aa6;
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+/* MAIN area uses Grid internally to stack sections on mobile */
+.main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+/* Hero */
+.hero {
+  padding: var(--pad);
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(16,32,40,0.04);
+}
+
+/* content holds articles + aside stacked on mobile */
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+/* articles style */
+.article {
+  padding: var(--pad);
+  background: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(16,32,40,0.04);
+}
+
+/* aside (will sit after articles on mobile) */
+.aside {
+  padding: var(--pad);
+  background: #fff9f9;
+  border-radius: 8px;
+  color: #21333a;
+}
+
+/* Gallery section: cards use flexbox for internal layout */
+.gallery {
+  padding: var(--pad);
+  background: var(--card-bg);
+  border-radius: 8px;
+}
+.cards {
+  display: flex;
+  gap: .75rem;
+  flex-direction: column; /* stack cards on mobile */
+}
+.card { background: #fff; border-radius: 6px; padding: .5rem; box-shadow: 0 6px 14px rgba(16,32,40,0.03); display: flex; gap:.5rem; align-items: center; }
+.card img { width: 28%; height: auto; border-radius: 4px; object-fit: cover; }
+.card p { margin: 0; font-size: .95rem; }
+
+/* Contact / form */
+.contact { padding: var(--pad); background: var(--card-bg); border-radius: 8px; }
+.simple-form label { display: block; margin-bottom: .6rem; font-size: .95rem; }
+.simple-form input, .simple-form textarea {
+  width: 100%;
+  padding: .5rem;
+  border: 1px solid #e6edf0;
+  border-radius: 6px;
+  font-size: .95rem;
+}
+.form-actions { margin-top: .6rem; display: flex; gap: .5rem; }
+.form-actions button { padding: .5rem .8rem; border-radius: 6px; border: none; background: var(--accent); color: white; cursor: pointer; }
+
+/* Footer */
+.site-footer {
+  grid-area: footer;
+  text-align: center;
+  padding: .75rem;
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+/* Use relative breakpoints; tablet ~ min-width 600px */
+@media (min-width: 600px) {
+  :root { --gap: 1.1rem; }
+
+  .site {
+    grid-template-columns: 1fr; /* still single column, but internal grids change */
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "footer";
+  }
+
+  /* content becomes two columns: articles left, aside right */
+  .content {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  .cards {
+    flex-direction: row; /* place gallery cards side-by-side on tablet */
+  }
+
+  .card img { width: 40%; }
+}
+
+/* ---------- Desktop (large screens) ---------- */
+/* Desktop >= 1024px: full multi-column layout with CSS Grid placement */
+@media (min-width: 1024px) {
+  :root { --gap: 1.25rem; --pad: 1rem; }
+
+  .site {
+    grid-template-columns: 220px 1fr 300px; /* left rail, main, right rail */
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "header header header"
+      "nav nav nav"
+      "main main aside"
+      "footer footer footer";
+    gap: var(--gap);
+    align-items: start;
+  }
+
+  /* header spans across the top, keep it compact */
+  .site-header { text-align: left; padding: 1rem 1.25rem; }
+
+  /* Nav as a horizontal row centered */
+  .site-nav { padding: 0 1rem; }
+  .nav-list { justify-content: flex-start; gap: .6rem; }
+
+  /* main area becomes a grid within the main column */
+  .main {
+    grid-column: 1 / span 2;
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    grid-template-columns: 1fr; /* articles stacked inside main, aside sits in the aside column */
+  }
+
+  /* Move aside out to the right column using grid-area on desktop */
+  .aside { grid-column: 3; }
+
+  /* Make gallery cards align horizontally and equal width */
+  .cards { flex-direction: row; }
+  .card { flex: 1 1 0; flex-direction: column; align-items: stretch; }
+  .card img { width: 100%; height: 10.5rem; object-fit: cover; border-radius: 6px; }
+
+  /* Slightly larger typography */
+  .site-title { font-size: 1.45rem; }
+  .hero p { max-width: 60ch; }
+}
+
+/* ---------- Accessibility helpers ---------- */
+a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid rgba(11,106,166,0.12); outline-offset: 2px; }
