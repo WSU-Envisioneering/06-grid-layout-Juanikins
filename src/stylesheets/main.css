@@ -6,7 +6,7 @@
 html,body { height: 100%; margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #102028; background: #f7fafb; }
 a { color: #0b6aa6; text-decoration: none; }
 
-/* Use rem for spacing; base font-size is browser default (16px) so 1rem ≈ 16px */
+
 :root {
   --gap: 1rem;
   --pad: 0.9rem;
@@ -32,7 +32,7 @@ a { color: #0b6aa6; text-decoration: none; }
   padding: calc(var(--gap) * 0.75);
 }
 
-/* ---------- Regions ---------- */
+
 .site-header {
   grid-area: header;
   background: linear-gradient(180deg, #eef8fb, #ffffff);
@@ -49,11 +49,11 @@ a { color: #0b6aa6; text-decoration: none; }
   padding: 0;
 }
 
-/* nav uses flexbox to layout items in a row or column */
+
 .nav-list {
   list-style: none;
   display: flex;
-  flex-direction: row; /* on mobile we keep it horizontal but wrap */
+  flex-direction: row; 
   gap: .5rem;
   justify-content: center;
   flex-wrap: wrap;
@@ -69,7 +69,7 @@ a { color: #0b6aa6; text-decoration: none; }
   font-size: .95rem;
 }
 
-/* MAIN area uses Grid internally to stack sections on mobile */
+/*
 .main {
   grid-area: main;
   display: grid;
@@ -85,7 +85,7 @@ a { color: #0b6aa6; text-decoration: none; }
   box-shadow: 0 6px 18px rgba(16,32,40,0.04);
 }
 
-/* content holds articles + aside stacked on mobile */
+
 .content {
   display: grid;
   grid-template-columns: 1fr;
@@ -100,7 +100,7 @@ a { color: #0b6aa6; text-decoration: none; }
   box-shadow: 0 6px 14px rgba(16,32,40,0.04);
 }
 
-/* aside (will sit after articles on mobile) */
+
 .aside {
   padding: var(--pad);
   background: #fff9f9;
@@ -108,7 +108,7 @@ a { color: #0b6aa6; text-decoration: none; }
   color: #21333a;
 }
 
-/* Gallery section: cards use flexbox for internal layout */
+
 .gallery {
   padding: var(--pad);
   background: var(--card-bg);
@@ -145,12 +145,12 @@ a { color: #0b6aa6; text-decoration: none; }
   font-size: .95rem;
 }
 
-/* Use relative breakpoints; tablet ~ min-width 600px */
+
 @media (min-width: 600px) {
   :root { --gap: 1.1rem; }
 
   .site {
-    grid-template-columns: 1fr; /* still single column, but internal grids change */
+    grid-template-columns: 1fr; 
     grid-template-areas:
       "header"
       "nav"
@@ -158,26 +158,25 @@ a { color: #0b6aa6; text-decoration: none; }
       "footer";
   }
 
-  /* content becomes two columns: articles left, aside right */
+
   .content {
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
 
   .cards {
-    flex-direction: row; /* place gallery cards side-by-side on tablet */
+    flex-direction: row; 
   }
 
   .card img { width: 40%; }
 }
 
-/* ---------- Desktop (large screens) ---------- */
-/* Desktop >= 1024px: full multi-column layout with CSS Grid placement */
+
 @media (min-width: 1024px) {
   :root { --gap: 1.25rem; --pad: 1rem; }
 
   .site {
-    grid-template-columns: 220px 1fr 300px; /* left rail, main, right rail */
+    grid-template-columns: 220px 1fr 300px; 
     grid-template-rows: auto auto 1fr auto;
     grid-template-areas:
       "header header header"
@@ -188,35 +187,34 @@ a { color: #0b6aa6; text-decoration: none; }
     align-items: start;
   }
 
-  /* header spans across the top, keep it compact */
+ 
   .site-header { text-align: left; padding: 1rem 1.25rem; }
 
-  /* Nav as a horizontal row centered */
+
   .site-nav { padding: 0 1rem; }
   .nav-list { justify-content: flex-start; gap: .6rem; }
 
-  /* main area becomes a grid within the main column */
   .main {
     grid-column: 1 / span 2;
     grid-template-columns: 1fr;
   }
 
   .content {
-    grid-template-columns: 1fr; /* articles stacked inside main, aside sits in the aside column */
+    grid-template-columns: 1fr; 
   }
 
-  /* Move aside out to the right column using grid-area on desktop */
+
   .aside { grid-column: 3; }
 
-  /* Make gallery cards align horizontally and equal width */
+ 
   .cards { flex-direction: row; }
   .card { flex: 1 1 0; flex-direction: column; align-items: stretch; }
   .card img { width: 100%; height: 10.5rem; object-fit: cover; border-radius: 6px; }
 
-  /* Slightly larger typography */
+
   .site-title { font-size: 1.45rem; }
   .hero p { max-width: 60ch; }
 }
 
-/* ---------- Accessibility helpers ---------- */
+
 a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid rgba(11,106,166,0.12); outline-offset: 2px; }
